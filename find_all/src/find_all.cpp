@@ -6,17 +6,29 @@
 using namespace std::placeholders;
 
 
-void predicate(double elem, double threshold, std::vector<double> &v)
+class Predicate
 {
-	if (elem >= threshold)
-	{
-		v.push_back(elem);
-		std::cout << "found " << v.size() << " entries\n";
-	} 
-}
+	public:
+		void operator()(double elem, double threshold, std::vector<double> &v)
+		{
+			if (elem >= threshold)
+			{
+				v.push_back(elem);
+			} 
+		}
+};
 
-int main()
+
+int main( int argc, char** args )
 {
+	if (argc < 2)
+	{
+		std::cout << "\nUsage: " << args[0] << " <threshold>\n";
+		return 0;
+	}
+
+	double threshold = std::stod(args[1]);
+
 	std::vector<double> dvec;
 	dvec.push_back(0);
 	dvec.push_back(1);
@@ -30,10 +42,12 @@ int main()
 	dvec.push_back(9);
 	dvec.push_back(10);
 
+	Predicate predicate;
 	std::vector<double> res;
-	//std::for_each( dvec.begin(), dvec.end(), [&] (double d) { if (d>=5) {v.push_back(d);} } );
-	std::function< void(double) > pred5 = std::bind( predicate, _1, 5, std::ref(res) );
-	std::for_each( dvec.begin(), dvec.end(), pred5 );
+
+	std::function< void(double) > pred = std::bind( predicate, _1, threshold, std::ref(res) );
+
+	std::for_each( dvec.begin(), dvec.end(), pred );
 
 	std::cout << "\nOutput: " << res.size() << " entries\n";
 	for (auto elem : res)
