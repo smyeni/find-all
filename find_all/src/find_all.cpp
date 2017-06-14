@@ -49,7 +49,8 @@ int main( int argc, char** args )
 
 	std::for_each( dvec.begin(), dvec.end(), pred );
 
-	std::cout << "\nOutput: " << res.size() << " entries\n";
+	unsigned n = std::count_if( dvec.begin, dvec.end(), [&] (int item) { return (item >= threshold); } );
+	std::cout << "\nOutput: " << res.size() << " (" << n << ") entries\n";
 	for (auto elem : res)
 	{
 		std::cout << elem << '\n';
