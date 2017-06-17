@@ -6,6 +6,7 @@
 using namespace std::placeholders;
 
 
+/*
 class Predicate
 {
 	public:
@@ -17,6 +18,7 @@ class Predicate
 			} 
 		}
 };
+*/
 
 
 int main( int argc, char** args )
@@ -31,14 +33,23 @@ int main( int argc, char** args )
 
 	std::vector<double> dvec{-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10};
 
-	Predicate predicate;
 	std::vector<double> res;
+	//Predicate predicate;
+	//std::function< void(double) > pred = std::bind( predicate, _1, threshold, std::ref(res) );
+	//std::for_each( dvec.begin(), dvec.end(), pred );
 
-	std::function< void(double) > pred = std::bind( predicate, _1, threshold, std::ref(res) );
+	unsigned n = std::count_if( dvec.begin(), 
+								dvec.end(), 
+								[&] (const int& item) 
+								{ 
+									bool result = (item >= threshold); 
+									if (result) {
+										res.push_back(item);
+									}
+									return result;
+								}
+							);
 
-	std::for_each( dvec.begin(), dvec.end(), pred );
-
-	unsigned n = std::count_if( dvec.begin(), dvec.end(), [&] (const int& item) { return (item >= threshold); } );
 	std::cout << "\nOutput: " << res.size() << " (" << n << ") entries\n";
 	for (auto elem : res)
 	{
