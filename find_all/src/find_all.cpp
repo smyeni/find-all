@@ -6,19 +6,17 @@
 using namespace std::placeholders;
 
 
-/*
-class Predicate
-{
-	public:
-		void operator()(double elem, double threshold, std::vector<double> &v)
-		{
-			if (elem >= threshold)
-			{
-				v.push_back(elem);
-			} 
-		}
-};
-*/
+//class Predicate
+//{
+//	public:
+//		void operator()(double elem, double threshold, std::vector<double> &v)
+//		{
+//			if (elem >= threshold)
+//			{
+//				v.push_back(elem);
+//			} 
+//		}
+//};
 
 
 int main( int argc, char** args )
