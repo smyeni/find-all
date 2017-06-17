@@ -29,18 +29,7 @@ int main( int argc, char** args )
 
 	double threshold = std::stod(args[1]);
 
-	std::vector<double> dvec;
-	dvec.push_back(0);
-	dvec.push_back(1);
-	dvec.push_back(2);
-	dvec.push_back(3);
-	dvec.push_back(4);
-	dvec.push_back(5);
-	dvec.push_back(6);
-	dvec.push_back(7);
-	dvec.push_back(8);
-	dvec.push_back(9);
-	dvec.push_back(10);
+	std::vector<double> dvec{-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10};
 
 	Predicate predicate;
 	std::vector<double> res;
